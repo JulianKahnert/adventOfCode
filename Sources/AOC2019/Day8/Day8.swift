@@ -30,6 +30,28 @@ struct SpaceImageFormat {
         return layers
     }
 
+    mutating func renderImage() -> [String] {
+
+        var image = [String]()
+        for rowIndex in 0..<height {
+            image.append("")
+            for pixelIndex in 0..<width {
+
+                for layer in layers {
+                    let row = layer[rowIndex]
+                    let index = row.index(row.startIndex, offsetBy: pixelIndex)
+                    let pixelValue = row[index]
+
+                    if pixelValue != "2" {
+                        image[rowIndex].append(pixelValue == "0" ? "X" : " ")
+                        break
+                    }
+                }
+            }
+        }
+        return image
+    }
+
     private func createLayer(from input: String) -> [String] {
         let layer = input.split(by: width)
         guard layer.count == height else { fatalError() }

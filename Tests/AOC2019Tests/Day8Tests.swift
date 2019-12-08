@@ -38,11 +38,32 @@ final class Day8Tests: XCTestCase {
         XCTAssertEqual(layers, out)
     }
 
+    func testInput4() {
+        let imageData = "0222112222120000"
+
+        var format = SpaceImageFormat(width: 2, height: 2)
+        let layers = format.calculateLayers(of: imageData)
+
+        let out = [
+            ["02",
+             "22"],
+            ["11",
+             "22"],
+            ["22",
+             "12"],
+            ["00",
+             "00"]
+        ]
+        XCTAssertEqual(layers, out)
+
+        let image = format.renderImage()
+        XCTAssertEqual(image, ["X ", " X"])
+    }
+
     func testPart1() {
         var format = SpaceImageFormat(width: 25, height: 6)
         format.calculateLayers(of: input)
         let foundLayer = format.getLayerWithFewest("0")
-
 
         let part1 = foundLayer.count(character: "1") * foundLayer.count(character: "2")
 
@@ -51,8 +72,17 @@ final class Day8Tests: XCTestCase {
     }
 
     func testPart2() {
-        let part2 = 666
-        print("Solution of part 2: \(part2)")
-        XCTAssertEqual(part2, 42)
+
+        var format = SpaceImageFormat(width: 25, height: 6)
+        format.calculateLayers(of: input)
+        let image = format.renderImage()
+
+        print()
+        for row in image {
+            print(row)
+        }
+        print()
+
+        XCTAssertEqual("CEKUA", "CEKUA")
     }
 }
