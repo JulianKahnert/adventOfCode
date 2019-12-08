@@ -9,99 +9,51 @@
 import Foundation
 import AOCHelper
 
-class Intcode {
+struct Intcode {
 
-    struct Operation: Hashable {
-        static func ==(lhs: Operation, rhs: Operation) -> Bool { return lhs.instruction == rhs.instruction }
+    private enum Instruction: Int {
+        case add = 1
+        case multiply = 2
+        case `break` = 99
+    }
 
-        static func interpret(pc: Int, memory: Array<Int>, arguments: Int) -> Array<Int> {
-            let digits = Array((memory[pc] / 100).digits.reversed()) // chop off the instruction itself
-            return (0 ..< arguments).map { argIndex -> Int in
-                let v = memory[pc + argIndex + 1]
-                return (digits.at(argIndex) == 1) ? v : memory[v]
-            }
+    var memory: [Int]
+    var index: Int
+
+    var io: Int {
+        get {
+            memory[0]
         }
-
-        static let add = Operation(instruction: 1, run: { pc, _, mem in
-            let params = interpret(pc: pc, memory: mem, arguments: 2) // the third argument is ALWAYS positional
-            mem[mem[pc+3]] = params[0] + params[1]
-            pc += 4
-        })
-        static let multiply = Operation(instruction: 2, run: { pc, _, mem in
-            let params = interpret(pc: pc, memory: mem, arguments: 2) // the third argument is ALWAYS positional
-            mem[mem[pc+3]] = params[0] * params[1]
-            pc += 4
-        })
-        static let set = Operation(instruction: 3, run: { pc, io, mem in
-            mem[mem[pc+1]] = io // the first argument is ALWAYS positional
-            pc += 2
-        })
-        static let get = Operation(instruction: 4, run: { pc, io, mem in
-            let params = interpret(pc: pc, memory: mem, arguments: 1)
-            io = params[0]
-            pc += 2
-        })
-        static let jumpIfTrue = Operation(instruction: 5, run: { pc, io, mem in
-            let params = interpret(pc: pc, memory: mem, arguments: 2)
-            if params[0] != 0 {
-                pc = params[1]
-            } else {
-                pc += 3
-            }
-        })
-        static let jumpIfFalse = Operation(instruction: 6, run: { pc, io, mem in
-            let params = interpret(pc: pc, memory: mem, arguments: 2)
-            if params[0] == 0 {
-                pc = params[1]
-            } else {
-                pc += 3
-            }
-        })
-        static let lessThan = Operation(instruction: 7, run: { pc, io, mem in
-            let params = interpret(pc: pc, memory: mem, arguments: 2) // the third argument is ALWAYS positional
-            mem[mem[pc+3]] = (params[0] < params[1]) ? 1 : 0
-            pc += 4
-        })
-        static let equal = Operation(instruction: 8, run: { pc, io, mem in
-            let params = interpret(pc: pc, memory: mem, arguments: 2) // the third argument is ALWAYS positional
-            mem[mem[pc+3]] = (params[0] == params[1]) ? 1 : 0
-            pc += 4
-        })
-        static let `break` = Operation(instruction: 99, run: { pc, _, mem in
-            pc = mem.count
-        })
-
-        let instruction: Int
-        let run: (_ pc: inout Int, _ io: inout Int, _ memory: inout Array<Int>) -> Void
-
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(instruction)
+        set {
+            memory[0] = newValue
         }
     }
 
-    private(set) var memory: Array<Int>
-    let ops: Dictionary<Int, Operation>
+    private var shouldHalt: Bool = false
 
-    var pc = 0
-    var io = 0
-
-    init(memory: Array<Int>, supportedOperations: Set<Operation>) {
+    init(memory: [Int], index: Int = 0) {
         self.memory = memory
-        ops = supportedOperations.keyedBy { $0.instruction }
+        self.index = index
     }
 
-    func run(input: Int = 0) {
-        io = input
-        pc = 0
-        while pc < memory.count {
-            let instruction = memory[pc] % 100 // get the last two digits
-            guard let op = ops[instruction] else { fatalError("Unknown instruction: \(instruction)") }
-            op.run(&pc, &io, &memory)
+    mutating func set() {
+        let instruction = Instruction(rawValue: memory[index + 0])
+        switch instruction {
+        case .add:
+            memory[memory[index + 3]] = memory[memory[index + 1]] + memory[memory[index + 2]]
+        case .multiply:
+            memory[memory[index + 3]] = memory[memory[index + 1]] * memory[memory[index + 2]]
+        case .break:
+            shouldHalt = true
+        case .none:
+            fatalError("Unable to find instruction '\(instruction)' with value '\(memory[index + 0])' at position '\(index)'.")
         }
     }
 
-    func runAndGet(input: Int = 0) -> Int {
-        run(input: input)
-        return io
+    mutating func run() {
+        while index < memory.count && !shouldHalt {
+            set()
+            index += 4
+        }
     }
 }

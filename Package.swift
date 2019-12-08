@@ -4,12 +4,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "Day4",
+    name: "Advent of Code",
+    platforms: [.macOS(.v10_14)],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
-        .library(
-            name: "Day4",
-            targets: ["Day4"]),
+//        .executable(name: "advent", targets: ["advent"]),
+        .library(name: "AOCHelper", targets: ["AOCHelper"]),
+        .library(name: "AOC2019", targets: ["AOC2019"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -18,11 +19,15 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(
-            name: "Day4",
-            dependencies: []),
-        .testTarget(
-            name: "Day4Tests",
-            dependencies: ["Day4"]),
+//        .target(name: "advent", dependencies: ["AOC"]),
+
+//        .target(name: "AOC", dependencies: ["AOCCore", "AOC2019"]),
+
+
+
+        .target(name: "AOCHelper", dependencies: []),
+
+        .target(name: "AOC2019", dependencies: ["AOCHelper"]),
+        .testTarget(name: "AOC2019Tests", dependencies: ["AOC2019"]),
     ]
 )
