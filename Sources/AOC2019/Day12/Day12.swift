@@ -2,6 +2,12 @@ import Foundation
 import AOCHelper
 
 struct SolarSystem {
+
+    struct Snapshot: Hashable {
+        let p: Array<Int>
+        let v: Array<Int>
+    }
+
     var positions: [Point3]
     var velocities: [Point3]
     
@@ -39,9 +45,46 @@ struct SolarSystem {
     }
     
     func getTotalEnergy() -> Int {
-        let potentialEnergy = positions.map({ $0.getManitude() }).reduce(0, +)
-        let kineticEnergy = velocities.map({ $0.getManitude() }).reduce(0, +)
-        return potentialEnergy * kineticEnergy
+        var value = 0
+        for index in 0..<positions.count {
+            let positionMagnitude = positions[index].getManitude()
+            let velocitiesMagnitude = velocities[index].getManitude()
+            value += positionMagnitude * velocitiesMagnitude
+        }
+        return value
+    }
+
+    func snapshot(axis: Int) -> Snapshot {
+        let dim = dims[axis]
+        return Snapshot(p: positions.map { $0[keyPath: dim] },
+                        v: velocities.map { $0[keyPath: dim] })
+    }
+
+    static func stepsUntilNextRepeat(_ initialPositions: [Point3]) -> Int {
+        var system = SolarSystem(positions: initialPositions)
+        var snapshots: Array<Set<Snapshot>> = [[], [], []]
+        var periods: Array<UInt?> = [nil, nil, nil]
+
+        var stepCount: UInt = 0
+        while !periods.allSatisfy({ $0 != nil }) {
+
+
+            for axis in 0 ..< 3 {
+                guard periods[axis] == nil else { continue }
+                let snapshot = system.snapshot(axis: axis)
+                if snapshots[axis].contains(snapshot) {
+                    periods[axis] = stepCount
+                } else {
+                    snapshots[axis].insert(snapshot)
+                }
+            }
+
+            system.step()
+            stepCount += 1
+        }
+
+        let p = periods.compactMap {$0}
+        return Int(lcm(of: p))
     }
 }
 
