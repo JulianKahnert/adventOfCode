@@ -20,7 +20,7 @@ struct SolarSystem {
     
     mutating func step() {
         let indices = positions.map { positions.firstIndex(of: $0)! }
-        for pair in positions.combinations(n: indices, k: 2) where pair[0] != pair[1] {
+        for pair in indices.combinations(count: 2) where pair[0] != pair[1] {
             let moon1 = pair[0]
             let moon2 = pair[1]
             for dim in dims {

@@ -11,6 +11,7 @@ let package = Package(
 //        .executable(name: "advent", targets: ["advent"]),
         .library(name: "AOCHelper", targets: ["AOCHelper"]),
         .library(name: "AOC2019", targets: ["AOC2019"]),
+        .library(name: "AOC2020", targets: ["AOC2020"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -29,5 +30,8 @@ let package = Package(
 
         .target(name: "AOC2019", dependencies: ["AOCHelper"]),
         .testTarget(name: "AOC2019Tests", dependencies: ["AOC2019"]),
+        
+        .target(name: "AOC2020", dependencies: ["AOCHelper"]),
+        .testTarget(name: "AOC2020Tests", dependencies: ["AOC2020"]),
     ]
 )
