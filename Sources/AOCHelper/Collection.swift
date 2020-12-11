@@ -9,6 +9,13 @@
 import Foundation
 
 public extension Collection {
+    func print() -> Self {
+        for element in self {
+            Swift.print(element)
+        }
+        return self
+    }
+    
     func keyedBy<T: Hashable>(_ keyer: (Element) -> T?) -> Dictionary<T, Element> {
         var d = Dictionary<T, Element>()
         for item in self {
