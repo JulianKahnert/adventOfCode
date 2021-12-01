@@ -4,27 +4,27 @@ import AOCHelper
 struct SolarSystem {
 
     struct Snapshot: Hashable {
-        let p: Array<Int>
-        let v: Array<Int>
+        let p: [Int]
+        let v: [Int]
     }
 
     var positions: [Point3]
     var velocities: [Point3]
-    
+
     private let dims: [WritableKeyPath<Point3, Int>] = [\.x, \.y, \.z]
-    
+
     init(positions: [Point3]) {
         self.positions = positions
         self.velocities = positions.map { _ in .zero }
     }
-    
+
     mutating func step() {
         let indices = positions.map { positions.firstIndex(of: $0)! }
         for pair in indices.combinations(count: 2) where pair[0] != pair[1] {
             let moon1 = pair[0]
             let moon2 = pair[1]
             for dim in dims {
-                
+
                 // calculate new velocities
                 if positions[moon1][keyPath: dim] < positions[moon2][keyPath: dim] {
                     velocities[moon1][keyPath: dim] += 1
@@ -35,7 +35,7 @@ struct SolarSystem {
                 }
             }
         }
-        
+
         // calculate new positions
         for moonIndex in 0..<positions.count {
             for dim in dims {
@@ -43,7 +43,7 @@ struct SolarSystem {
             }
         }
     }
-    
+
     func getTotalEnergy() -> Int {
         var value = 0
         for index in 0..<positions.count {
@@ -62,12 +62,11 @@ struct SolarSystem {
 
     static func stepsUntilNextRepeat(_ initialPositions: [Point3]) -> Int {
         var system = SolarSystem(positions: initialPositions)
-        var snapshots: Array<Set<Snapshot>> = [[], [], []]
-        var periods: Array<UInt?> = [nil, nil, nil]
+        var snapshots: [Set<Snapshot>] = [[], [], []]
+        var periods: [UInt?] = [nil, nil, nil]
 
         var stepCount: UInt = 0
         while !periods.allSatisfy({ $0 != nil }) {
-
 
             for axis in 0 ..< 3 {
                 guard periods[axis] == nil else { continue }

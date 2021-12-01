@@ -2,7 +2,7 @@ import XCTest
 @testable import AOC2020
 
 final class Day8Tests: XCTestCase {
-    
+
     func testPart1() {
         let rawInstructions = Self.testValuesPart1.split(separator: "\n")
             .map(String.init)
@@ -11,14 +11,14 @@ final class Day8Tests: XCTestCase {
 
         XCTAssertEqual(console.accumulator, 5)
     }
-    
+
     func testResultPart1() {
         let rawInstructions = Self.valuesPart1.split(separator: "\n")
             .map(String.init)
-        
+
         let console = HandheldGameConsole(rawInstructions: rawInstructions)
         console.run()
-        
+
         XCTAssert(console.accumulator < 2083)
         XCTAssert(console.accumulator > 103)
         XCTAssertEqual(console.accumulator, 2034)
@@ -28,7 +28,7 @@ final class Day8Tests: XCTestCase {
         let instructions = Self.testValuesPart1.split(separator: "\n")
             .map(String.init)
             .compactMap(Instruction.init)
-        
+
         let value = bruteForceInstructionChanges(instructions)
         XCTAssertEqual(value, 8)
     }
@@ -55,7 +55,7 @@ extension Day8Tests {
         jmp -4
         acc +6
         """
-    
+
     static let valuesPart1: String = """
         nop +355
         acc +46

@@ -15,9 +15,9 @@ public extension Collection {
         }
         return self
     }
-    
-    func keyedBy<T: Hashable>(_ keyer: (Element) -> T?) -> Dictionary<T, Element> {
-        var d = Dictionary<T, Element>()
+
+    func keyedBy<T: Hashable>(_ keyer: (Element) -> T?) -> [T: Element] {
+        var d = [T: Element]()
         for item in self {
             if let key = keyer(item) {
                 d[key] = item
@@ -25,9 +25,9 @@ public extension Collection {
         }
         return d
     }
-    
+
     func combinations(count: Int) -> [[Iterator.Element]] {
-    
+
         if count == 0 {
             return [[]]
         }
@@ -52,4 +52,12 @@ public extension RandomAccessCollection {
         return self[index]
     }
 
+}
+
+public extension Array {
+    func window(from offset: Index, size: Int) -> ArraySlice<Element>? {
+        let upperBound = offset + size - 1
+        guard upperBound < endIndex else { return nil }
+        return self[offset...upperBound]
+    }
 }

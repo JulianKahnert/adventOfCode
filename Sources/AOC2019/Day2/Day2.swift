@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Part 1
 
 func part1(_ input: [Int]) -> Int {
@@ -12,7 +11,6 @@ func part1(_ input: [Int]) -> Int {
     code.run()
     return code.memory[0]
 }
-
 
 // MARK: - Part 2
 

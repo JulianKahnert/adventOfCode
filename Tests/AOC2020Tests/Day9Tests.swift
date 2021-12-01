@@ -2,7 +2,7 @@ import XCTest
 @testable import AOC2020
 
 final class Day9Tests: XCTestCase {
-    
+
     func testPart1() {
         let numbers = Self.testValuesPart1
             .split(separator: "\n")
@@ -10,10 +10,10 @@ final class Day9Tests: XCTestCase {
             .compactMap(Int.init)
 
         let value = findWrongNumber(in: numbers, preambleSize: 5)
-        
+
         XCTAssertEqual(value, 127)
     }
-    
+
     func testResultPart1() {
         let numbers = Self.valuesPart1
             .split(separator: "\n")
@@ -30,9 +30,9 @@ final class Day9Tests: XCTestCase {
             .split(separator: "\n")
             .map(String.init)
             .compactMap(Int.init)
-        
+
         let value = findRangeThatSums(to: 127, in: numbers)
-        
+
         XCTAssertEqual(value, 62)
     }
 
@@ -41,7 +41,7 @@ final class Day9Tests: XCTestCase {
             .split(separator: "\n")
             .map(String.init)
             .compactMap(Int.init)
-        
+
         let value = findRangeThatSums(to: 105950735, in: numbers)
 //        print(value)
         XCTAssertEqual(value, 13826915)
@@ -71,7 +71,7 @@ extension Day9Tests {
         309
         576
         """
-    
+
     static let valuesPart1: String = """
         1
         30

@@ -2,15 +2,15 @@ import XCTest
 @testable import AOC2020
 
 final class Day1Tests: XCTestCase {
-    
+
     func testPart1() {
         let result = expenseReportCalculation(Self.testValuesPart1)
         XCTAssertEqual(result, 514579)
     }
-    
+
 	func testResultPart1() {
         let result = expenseReportCalculation(Self.valuesPart1)
-        
+
         print("Solution of part 1: \(result)")
         XCTAssertEqual(result, 494475)
 	}
@@ -20,7 +20,7 @@ final class Day1Tests: XCTestCase {
 
         XCTAssertEqual(result, 241861950)
 	}
-    
+
     func testResultPart2() {
         let result = expenseReportCalculation(Self.valuesPart1, numOfAddends: 3)
 
@@ -38,7 +38,7 @@ extension Day1Tests {
         675,
         1456
     ]
-    
+
     static let valuesPart1: [Int] = """
     1511
     1112

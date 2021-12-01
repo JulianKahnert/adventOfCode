@@ -2,13 +2,13 @@ import XCTest
 @testable import AOC2020
 
 final class Day16Tests: XCTestCase {
-    
+
     func testPart1() {
         let ticketData = parseTicketRules(Self.testValuesPart1)
         XCTAssertEqual(ticketData.yourTicket.fields, [7, 1, 14])
         XCTAssertEqual(ticketData.nearbyTickets.count, 4)
         XCTAssertEqual(ticketData.rules.count, 3)
-        
+
         let value = getTicketScanningErrorRate(from: ticketData)
         XCTAssertEqual(value, 71)
     }

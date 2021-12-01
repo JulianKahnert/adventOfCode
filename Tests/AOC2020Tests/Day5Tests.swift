@@ -2,13 +2,13 @@ import XCTest
 @testable import AOC2020
 
 final class Day5Tests: XCTestCase {
-    
+
     func test1Part1() {
         let pass0 = BoardingPass(data: "FBFBBFFRLR")
         XCTAssertEqual(pass0.row, 44)
         XCTAssertEqual(pass0.column, 5)
         XCTAssertEqual(pass0.seatId, 357)
-        
+
         let pass1 = BoardingPass(data: "BFFFBBFRRR")
         XCTAssertEqual(pass1.row, 70)
         XCTAssertEqual(pass1.column, 7)
@@ -24,7 +24,7 @@ final class Day5Tests: XCTestCase {
         XCTAssertEqual(pass3.column, 4)
         XCTAssertEqual(pass3.seatId, 820)
     }
-    
+
 	func testResultPart1() {
         let result = Self.valuesPart1
             .split(separator: "\n")
@@ -42,17 +42,17 @@ final class Day5Tests: XCTestCase {
             .map(BoardingPass.init)
             .map(\.seatId)
             .sorted()
-        
+
         var foundId: Int?
         var previousId: Int?
         for id in seatIds {
-            
+
             if let previousId = previousId,
                id - previousId == 2 {
                 foundId = previousId + 1
                 break
             }
-            
+
             previousId = id
         }
 
@@ -62,7 +62,7 @@ final class Day5Tests: XCTestCase {
 }
 
 extension Day5Tests {
-    
+
     static let valuesPart1: String = """
         FBFBFFBLLR
         FBBBFFBLLL

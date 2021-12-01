@@ -2,14 +2,14 @@ import XCTest
 @testable import AOC2020
 
 final class Day6Tests: XCTestCase {
-    
+
     func testPart1() {
-        
+
         let count = Self.testValuesPart1
             .formGroupCountDay6()
         XCTAssertEqual(count, 11)
     }
-    
+
     func testResultPart1() {
         let count = Self.valuesPart1
             .formGroupCountDay6()
@@ -18,12 +18,12 @@ final class Day6Tests: XCTestCase {
     }
 
     func testPart2() {
-        
+
         let count = Self.testValuesPart1
             .formEveryoneCountDay6()
         XCTAssertEqual(count, 6)
     }
-    
+
     func testResultPart2() {
         let count = Self.valuesPart1
             .formEveryoneCountDay6()
@@ -50,7 +50,7 @@ extension Day6Tests {
 
         b
         """
-    
+
     static let valuesPart1: String = """
         bdmceunt
         ubcdjqvnmte

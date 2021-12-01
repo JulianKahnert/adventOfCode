@@ -5,7 +5,6 @@
 //  Created by Julian Kahnert on 01.12.20.
 //
 
-
 import Foundation
 import AOCHelper
 
@@ -25,15 +24,15 @@ final class FloorPlan {
         (0, 1),
         (1, -1),
         (1, 0),
-        (1, 1),
+        (1, 1)
     ]
-    
+
     private(set) var map: [[SeatType]]
-    
+
     init(_ input: String) {
         self.map = Self.parse(input)
     }
-    
+
     func getOccupiedSeatCountWhenStable(rule2: Bool = false) -> Int {
         var hasChanged = true
         while hasChanged {
@@ -47,7 +46,7 @@ final class FloorPlan {
             .filter { $0 == .occupied }
             .count
     }
-    
+
     func applyRules() -> Bool {
         var hasChanged = false
         var newMap = self.map
@@ -69,11 +68,11 @@ final class FloorPlan {
             }
 //            print("\n", separator: "", terminator: "")
         }
-        
+
         self.map = newMap
         return hasChanged
     }
-    
+
     func applyRules2() -> Bool {
         var hasChanged = false
         var newMap = self.map
@@ -95,11 +94,11 @@ final class FloorPlan {
             }
 //            print("\n", separator: "", terminator: "")
         }
-        
+
         self.map = newMap
         return hasChanged
     }
-    
+
     private func numOfOccupiedNeighbors(row: Int, col: Int) -> Int {
         var count = 0
         for direction in Self.directions {
@@ -110,7 +109,7 @@ final class FloorPlan {
         }
         return count
     }
-    
+
     func numOfOccupiedNeighborsInSight(row: Int, col: Int) -> Int {
         var count = 0
         for direction in Self.directions {
@@ -119,7 +118,7 @@ final class FloorPlan {
 //                for colMultiplier in 2..<map.first!.count {
 //                    let colOffset = direction.1 * colMultiplier
                 let colOffset = direction.1 * rowMultiplier
-                    
+
                     if let rowItems = map.at(row + rowOffset),
                        let seat = rowItems.at(col + colOffset),
                        seat != .floor {
@@ -134,7 +133,7 @@ final class FloorPlan {
         }
         return count
     }
-    
+
     private static func parse(_ input: String) -> [[SeatType]] {
         input.split(separator: "\n")
             .map(String.init)

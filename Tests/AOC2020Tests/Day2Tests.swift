@@ -2,15 +2,15 @@ import XCTest
 @testable import AOC2020
 
 final class Day2Tests: XCTestCase {
-    
+
     func testPart1() {
         let result = validPasswordCalculation(Self.testValuesPart1)
         XCTAssertEqual(result, 2)
     }
-    
+
 	func testResultPart1() {
         let result = validPasswordCalculation(Self.valuesPart1)
-        
+
         print("Solution of part 1: \(result)")
         XCTAssertEqual(result, 556)
 	}
@@ -20,7 +20,7 @@ final class Day2Tests: XCTestCase {
 
         XCTAssertEqual(result, 1)
 	}
-    
+
     func testResultPart2() {
         let result = validPasswordCalculation2(Self.valuesPart1)
 
@@ -37,7 +37,7 @@ extension Day2Tests {
         """
         .split(separator: "\n")
         .map(String.init)
-    
+
     static let valuesPart1: [String] = """
         1-2 x: xpxc
         1-5 b: bwlbbbbcq

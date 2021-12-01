@@ -12,16 +12,16 @@ import AOCHelper
 class Bag: Hashable {
     static func ==(lhs: Bag, rhs: Bag) -> Bool { lhs.name == rhs.name }
     func hash(into hasher: inout Hasher) { hasher.combine(name) }
-    
+
     private var parents = Set<Bag>()
-    private var children = Dictionary<Bag, Int>()
-    
+    private var children = [Bag: Int]()
+
     var totalCount: Int { children.reduce(into: 0) { $0 += (($1.key.totalCount + 1) * $1.value) } }
     var allParents: Set<Bag> { Set(parents + parents.flatMap(\.allParents)) }
-    
+
     let name: String
     init(name: String) { self.name = name }
-    
+
     func addBag(_ other: Bag, count: Int) {
         other.parents.insert(self)
         children[other, default: 0] += count
@@ -38,9 +38,9 @@ func parseBags(_ input: String) -> [BagColor: Bag] {
         .reduce(into: [BagColor: Bag]()) { (result, components) in
             let outerBagColor = components[0]
             let contents = components[1]
-            
+
             let bag = result[outerBagColor, inserting: Bag(name: outerBagColor)]
-            
+
             if contents != "no other bags." {
                 // contents = 1 bright white bag, 2 muted yellow bags.
                 contents.trimmingCharacters(in: CharacterSet(arrayLiteral: "."))

@@ -10,8 +10,8 @@ import Foundation
 
 extension FixedWidthInteger {
 
-    public var digits: Array<Self> {
-        var d = Array<Self>()
+    public var digits: [Self] {
+        var d = [Self]()
         var remainder = self
         if remainder < 0 { remainder *= -1 }
 

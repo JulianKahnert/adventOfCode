@@ -86,7 +86,6 @@ func getMinDistance(of seq1: [String], and seq2: [String]) -> Int {
         .min()!
 }
 
-
 // MARK: - Part 2
 
 func getMinSteps(of seq1: [String], and seq2: [String]) -> Int {

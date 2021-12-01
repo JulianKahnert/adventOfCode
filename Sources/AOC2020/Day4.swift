@@ -17,14 +17,14 @@ func parsePassports(from input: String) -> [NorthPolePassport] {
 
 struct NorthPolePassport {
     let data: String
-    
+
     var isValid: Bool {
         FieldTypes.allCases
             .allSatisfy { field in
                 data.contains("\(field.rawValue):")
             }
     }
-    
+
     var hasValidValues: Bool {
         data.split(separator: " ")
             .compactMap { data in
@@ -38,14 +38,14 @@ struct NorthPolePassport {
                 return type.isValid(data: String(value))
             }
     }
-    
+
     init(data: String) {
         self.data = data.components(separatedBy: CharacterSet.newlines).joined(separator: " ")
     }
 }
 
 extension NorthPolePassport {
-    
+
     enum FieldTypes: String, CaseIterable {
         case birthYear = "byr"          // (Birth Year)
         case issueYear = "iyr"          // (Issue Year)
@@ -55,7 +55,7 @@ extension NorthPolePassport {
         case eyeColor = "ecl"           // (Eye Color)
         case passportId = "pid"         // (Passport ID)
 //        case countryId = "cid"        // (Country ID)    // NOT REQUIRED
-        
+
         func isValid(data: String) -> Bool {
             switch self {
                 case .birthYear:
@@ -93,4 +93,3 @@ extension NorthPolePassport {
         }
     }
 }
-

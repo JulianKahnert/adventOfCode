@@ -43,11 +43,11 @@ public extension String {
 
         return parts
     }
-    
+
     var isNumeric: Bool {
         CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
     }
-    
+
     var isHex: Bool {
         CharacterSet(charactersIn: "0123456789abcdef").isSuperset(of: CharacterSet(charactersIn: self))
     }

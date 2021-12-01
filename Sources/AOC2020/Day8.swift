@@ -21,12 +21,12 @@ struct Instruction: CustomStringConvertible, Equatable, Hashable {
         let sign = argument < 0 ? "-" : "+"
         return "\(operation.rawValue) \(sign)\(abs(argument))"
     }
-    
+
     init(operation: Operation, argument: Int) {
         self.operation = operation
         self.argument = argument
     }
-    
+
     init?(_ input: String) {
         // input = "acc +1"
         let components = input.split(separator: " ")
@@ -45,19 +45,19 @@ struct Instruction: CustomStringConvertible, Equatable, Hashable {
 class HandheldGameConsole {
     typealias OperationArgument = (Operation, Int)
     let instructions: [Instruction]
-    
+
     private(set) var currentIndex = 0
     private(set) var accumulator = 0
     private(set) var looped = false
-    
+
     init(rawInstructions: [String]) {
         self.instructions = rawInstructions.compactMap(Instruction.init)
     }
-    
+
     init(instructions: [Instruction]) {
         self.instructions = instructions
     }
-    
+
     func run() {
         var previousIndices = Set<Int>()
         while let nextInstruction = instructions.at(currentIndex) {
@@ -66,12 +66,12 @@ class HandheldGameConsole {
                 break
             }
             previousIndices.insert(currentIndex)
-            
+
             handle(nextInstruction.operation, value: nextInstruction.argument)
             print("\(nextInstruction.description)  \t|\t\(accumulator)\t|\t\(currentIndex)")
         }
     }
-    
+
     private func handle(_ instruction: Operation, value: Int) {
         switch instruction {
             case .accumulate:
@@ -85,24 +85,23 @@ class HandheldGameConsole {
     }
 }
 
-
 func bruteForceInstructionChanges(_ instructions: [Instruction]) -> Int? {
     for index in 0..<instructions.count where instructions[index].operation != .accumulate {
         var instructionsCopy = instructions
-        
+
         let instruction = instructionsCopy[index]
         let newOperation: Operation = instruction.operation == .jump ? .noOperation : .jump
         instructionsCopy[index] = Instruction(operation: newOperation, argument: instruction.argument)
-        
+
         let console = HandheldGameConsole(instructions: instructionsCopy)
         console.run()
         if !console.looped,
            console.currentIndex == instructions.count {
             print(console.currentIndex)
-            
+
             return console.accumulator
         }
     }
-    
+
     return nil
 }

@@ -2,10 +2,10 @@ import XCTest
 @testable import AOC2020
 
 final class Day11Tests: XCTestCase {
-    
+
     func testPart1() {
         let floorPlan = FloorPlan(Self.testValuesPart1)
-        
+
         let value = floorPlan.getOccupiedSeatCountWhenStable()
 
         XCTAssertEqual(value, 37)
@@ -13,7 +13,7 @@ final class Day11Tests: XCTestCase {
 
     func testResultPart1() {
         let floorPlan = FloorPlan(Self.valuesPart1)
-        
+
         let value = floorPlan.getOccupiedSeatCountWhenStable()
 
         XCTAssertEqual(value, 2299)
@@ -31,22 +31,22 @@ final class Day11Tests: XCTestCase {
         #........
         ...#.....
         """)
-        
+
         let value = floorPlan.numOfOccupiedNeighborsInSight(row: 4, col: 3)
         XCTAssertEqual(value, 8)
     }
-    
+
     func test2Part2() {
         let floorPlan = FloorPlan("""
         .............
         .L.L.#.#.#.#.
         .............
         """)
-        
+
         let value = floorPlan.numOfOccupiedNeighborsInSight(row: 1, col: 1)
         XCTAssertEqual(value, 0)
     }
-    
+
     func testResultPart2() {
         let floorPlan = FloorPlan(Self.valuesPart1)
         let value = floorPlan.getOccupiedSeatCountWhenStable(rule2: true)

@@ -2,35 +2,35 @@ import XCTest
 @testable import AOC2020
 
 final class Day10Tests: XCTestCase {
-    
+
     func testPart1() {
         let numbers = Self.testValues1Part1
             .split(separator: "\n")
             .map(String.init)
             .compactMap(Int.init)
-        
+
         let value = calculateJoltDifferences(from: numbers)
 
         XCTAssertEqual(value, 35)
     }
-    
+
     func test2Part1() {
         let numbers = Self.testValues2Part1
             .split(separator: "\n")
             .map(String.init)
             .compactMap(Int.init)
-        
+
         let value = calculateJoltDifferences(from: numbers)
 
         XCTAssertEqual(value, 220)
     }
-    
+
     func testResultPart1() {
         let numbers = Self.valuesPart1
             .split(separator: "\n")
             .map(String.init)
             .compactMap(Int.init)
-        
+
         let value = calculateJoltDifferences(from: numbers)
 
         XCTAssertEqual(value, 2312)
@@ -46,7 +46,7 @@ final class Day10Tests: XCTestCase {
 
         XCTAssertEqual(value, 8)
     }
-    
+
     func test2Part2() {
         let numbers = Self.testValues2Part1
             .split(separator: "\n")
@@ -118,7 +118,7 @@ extension Day10Tests {
         10
         3
         """
-    
+
     static let valuesPart1: String = """
         99
         151

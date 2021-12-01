@@ -37,7 +37,6 @@ func countValidNumber(in range: ClosedRange<Int>) -> Int {
     return count
 }
 
-
 // MARK: - Part 2
 
 extension String {

@@ -12,6 +12,7 @@ let package = Package(
         .library(name: "AOCHelper", targets: ["AOCHelper"]),
         .library(name: "AOC2019", targets: ["AOC2019"]),
         .library(name: "AOC2020", targets: ["AOC2020"]),
+        .library(name: "AOC2021", targets: ["AOC2021"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,14 +25,15 @@ let package = Package(
 
 //        .target(name: "AOC", dependencies: ["AOCCore", "AOC2019"]),
 
-
-
         .target(name: "AOCHelper", dependencies: []),
 
         .target(name: "AOC2019", dependencies: ["AOCHelper"]),
         .testTarget(name: "AOC2019Tests", dependencies: ["AOC2019"]),
-        
+
         .target(name: "AOC2020", dependencies: ["AOCHelper"]),
         .testTarget(name: "AOC2020Tests", dependencies: ["AOC2020"]),
+
+        .target(name: "AOC2021", dependencies: ["AOCHelper"]),
+        .testTarget(name: "AOC2021Tests", dependencies: ["AOC2021"])
     ]
 )

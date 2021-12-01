@@ -2,7 +2,7 @@ import XCTest
 @testable import AOC2020
 
 final class Day7Tests: XCTestCase {
-    
+
     func testPart1() {
         let bags = parseBags(Self.testValuesPart1)
         let target = bags["shiny gold"]!
@@ -10,7 +10,7 @@ final class Day7Tests: XCTestCase {
         let count = target.allParents.count
         XCTAssertEqual(count, 4)
     }
-    
+
     func testResultPart1() {
         let bags = parseBags(Self.valuesPart1)
         let target = bags["shiny gold"]!
@@ -30,7 +30,7 @@ final class Day7Tests: XCTestCase {
         let count = target.totalCount
         XCTAssertEqual(count, 126)
     }
-    
+
     func testResultPart2() {
         let bags = parseBags(Self.valuesPart1)
         let target = bags["shiny gold"]!
@@ -52,7 +52,7 @@ extension Day7Tests {
         faded blue bags contain no other bags.
         dotted black bags contain no other bags.
         """
-    
+
     static let valuesPart1: String = """
         wavy green bags contain 1 posh black bag, 1 faded green bag, 4 wavy red bags.
         dotted chartreuse bags contain 1 light beige bag.
@@ -649,7 +649,7 @@ extension Day7Tests {
         clear silver bags contain 3 faded olive bags, 3 drab turquoise bags, 4 drab purple bags.
         vibrant cyan bags contain 5 vibrant plum bags.
         """
-    
+
     static let testValuesPart2 = """
         shiny gold bags contain 2 dark red bags.
         dark red bags contain 2 dark orange bags.

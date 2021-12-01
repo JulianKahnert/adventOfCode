@@ -2,13 +2,13 @@ import XCTest
 @testable import AOC2020
 
 final class Day4Tests: XCTestCase {
-    
+
     func testPart1() {
         let result = parsePassports(from: Self.testValuesPart1)
             .filter(\.isValid)
         XCTAssertEqual(result.count, 2)
     }
-    
+
 	func testResultPart1() {
         let result = parsePassports(from: Self.valuesPart1)
             .filter(\.isValid)
@@ -36,7 +36,7 @@ final class Day4Tests: XCTestCase {
             .filter(\.hasValidValues)
         XCTAssertEqual(result.count, 0)
 	}
-    
+
     func test2Part2() {
         let validData = """
         pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
@@ -64,7 +64,7 @@ final class Day4Tests: XCTestCase {
             .filter(\.hasValidValues)
         XCTAssertEqual(result.count, 198)
     }
-    
+
     // MARK: - More Tests
     func testValidation1() {
         let data = """
@@ -74,7 +74,7 @@ final class Day4Tests: XCTestCase {
         let passport = NorthPolePassport(data: data)
         XCTAssertTrue(passport.isValid)
     }
-    
+
     func testValidation2() {
         let data = """
             iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
@@ -101,7 +101,7 @@ extension Day4Tests {
         hcl:#cfa07d eyr:2025 pid:166559648
         iyr:2011 ecl:brn hgt:59in
         """
-    
+
     static let valuesPart1: String = """
         eyr:2028 iyr:2016 byr:1995 ecl:oth
         pid:543685203 hcl:#c0946f

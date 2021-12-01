@@ -17,7 +17,7 @@ final class Day6Tests: XCTestCase {
         J)K
         K)L
         """.components(separatedBy: .whitespacesAndNewlines)
-        
+
         let calc = OrbitCalculator(orbits: testInput)
         XCTAssertEqual(calc.calculateOrbitCount(), 42)
     }
@@ -28,7 +28,7 @@ final class Day6Tests: XCTestCase {
         print("Solution of part 1: \(part1)")
         XCTAssertEqual(part1, 171213)
     }
-    
+
     func testInput2() {
         let testInput = """
         COM)B
@@ -45,7 +45,7 @@ final class Day6Tests: XCTestCase {
         K)YOU
         I)SAN
         """.components(separatedBy: .whitespacesAndNewlines)
-        
+
         let calc = OrbitCalculator(orbits: testInput)
         XCTAssertEqual(calc.calculateMinTransfers(), 4)
     }

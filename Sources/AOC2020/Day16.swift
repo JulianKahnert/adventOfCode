@@ -5,27 +5,26 @@
 //  Created by Julian Kahnert on 01.12.20.
 //
 
-
 import Foundation
 import AOCHelper
 
-//class: 1-3 or 5-7
-//row: 6-11 or 33-44
-//seat: 13-40 or 45-50
+// class: 1-3 or 5-7
+// row: 6-11 or 33-44
+// seat: 13-40 or 45-50
 //
-//your ticket:
-//7,1,14
+// your ticket:
+// 7,1,14
 //
-//nearby tickets:
-//7,3,47
-//40,4,50
-//55,2,20
-//38,6,12
+// nearby tickets:
+// 7,3,47
+// 40,4,50
+// 55,2,20
+// 38,6,12
 
 struct TicketRule {
     let name: String
     let ranges: [ClosedRange<Int>]
-    
+
     func contains(_ number: Int) -> Bool {
         nil != ranges.first { $0.contains(number) }
     }
@@ -33,7 +32,7 @@ struct TicketRule {
 
 struct Ticket {
     let fields: [Int]
-    
+
     func isValid(with rules: [TicketRule]) -> Bool {
         !fields.contains { number in
             !rules.contains { $0.contains(number) }
@@ -41,7 +40,7 @@ struct Ticket {
     }
 }
 
-//typealias Ticket = [Int]
+// typealias Ticket = [Int]
 typealias TicketData = (rules: [TicketRule], yourTicket: Ticket, nearbyTickets: [Ticket])
 
 func parseTicketRules(_ input: String) -> TicketData {
@@ -49,7 +48,7 @@ func parseTicketRules(_ input: String) -> TicketData {
     let rawRules = elements[0]
     let rawYourTicket = elements[1].components(separatedBy: "your ticket:\n").last!.trimmingCharacters(in: .whitespacesAndNewlines)
     let rawTickets = elements[2].components(separatedBy: "nearby tickets:\n").last!.trimmingCharacters(in: .whitespacesAndNewlines)
-    
+
     let ticketRules = rawRules.split(separator: "\n")
         .map(String.init)
         .map { input -> TicketRule in
@@ -63,7 +62,7 @@ func parseTicketRules(_ input: String) -> TicketData {
 
             return TicketRule(name: String(elements[0]), ranges: ranges)
         }
-    
+
     let yourTicket = parseTicket(rawYourTicket)
     let tickets = rawTickets.split(separator: "\n")
         .map { parseTicket(String($0)) }
@@ -87,6 +86,6 @@ private func parseTicket(_ input: String) -> Ticket {
         .split(separator: ",")
         .map(String.init)
         .compactMap(Int.init)
-    
+
     return Ticket(fields: values)
 }

@@ -18,7 +18,7 @@ extension String {
         .map(\.count)
         .reduce(0, +)
     }
-    
+
     func formEveryoneCountDay6() -> Int {
 //        var count = 0
 //        let groups = self.components(separatedBy: "\n\n")
@@ -40,12 +40,11 @@ extension String {
     }
 }
 
-
 fileprivate extension Collection where Element: Sequence, Element.Element: Hashable {
     func uniqueElements() -> Set<Element.Element> {
         var iterator = makeIterator()
         guard let first = iterator.next() else { return Set() }
-        
+
         var matchedAll = Set(first)
         while let next = iterator.next() {
             matchedAll.formIntersection(Set(next))
