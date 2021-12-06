@@ -7,7 +7,6 @@
 
 import Foundation
 import AOCHelper
-import AppKit
 
 func playBingo(with input: String) -> Int {
     let game = BingoGame.parse(input)
