@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct Point3: Hashable, Equatable, CustomDebugStringConvertible {
+public struct Point3: Hashable, Equatable, CustomDebugStringConvertible, Sendable {
 
-    public static let zero = Point3(x: 0, y: 0, z: 0)
+    nonisolated public static let zero = Point3(x: 0, y: 0, z: 0)
 
     public var x: Int
     public var y: Int

@@ -1,18 +1,19 @@
-// swift-tools-version:5.1
+// swift-tools-version:6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "Advent of Code",
-    platforms: [.macOS(.v10_14)],
+    platforms: [.macOS(.v14)],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
 //        .executable(name: "advent", targets: ["advent"]),
         .library(name: "AOCHelper", targets: ["AOCHelper"]),
         .library(name: "AOC2019", targets: ["AOC2019"]),
         .library(name: "AOC2020", targets: ["AOC2020"]),
-        .library(name: "AOC2021", targets: ["AOC2021"])
+        .library(name: "AOC2021", targets: ["AOC2021"]),
+        .library(name: "AOC2024", targets: ["AOC2024"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -34,6 +35,9 @@ let package = Package(
         .testTarget(name: "AOC2020Tests", dependencies: ["AOC2020"]),
 
         .target(name: "AOC2021", dependencies: ["AOCHelper"]),
-        .testTarget(name: "AOC2021Tests", dependencies: ["AOC2021"])
+        .testTarget(name: "AOC2021Tests", dependencies: ["AOC2021"]),
+
+        .target(name: "AOC2024", dependencies: ["AOCHelper"]),
+        .testTarget(name: "AOC2024Tests", dependencies: ["AOC2024"])
     ]
 )
